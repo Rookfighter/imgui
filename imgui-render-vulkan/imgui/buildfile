@@ -1,6 +1,7 @@
 intf_libs = # Interface dependencies.
-import intf_libs += imgui%lib{imgui}
+import intf_libs += imgui%lib{imgui}  Vulkan-Hpp%lib{Vulkan-Hpp}
 impl_libs = # Implementation dependencies.
+# import impl_libs += 
 
 platform_libs =
 
@@ -14,7 +15,7 @@ switch $cxx.target.class
         }
         else
         {
-            platform_libs += vulkan-1.lib
+            platform_libs += vulkan-1.lib 
         }
     }
     case 'macos'
@@ -34,7 +35,7 @@ out_pfx_inc = [dir_path] $out_root/imgui/
 src_pfx_inc = [dir_path] $src_root/imgui/
 
 cxx.libs =+ $platform_libs
-cxx.poptions =+ "-I$out_pfx_inc" "-I$src_pfx_inc" -DIMGUI_EXPORT
+cxx.poptions =+ "-I$out_pfx_inc" "-I$src_pfx_inc" -DIMGUI_EXPORT -DVK_PROTOTYPES
 
 {hbmia obja}{*}: cxx.poptions += -DIMGUI_RENDER_VULKAN_STATIC_BUILD
 {hbmis objs}{*}: cxx.poptions += -DIMGUI_RENDER_VULKAN_SHARED_BUILD
@@ -42,7 +43,7 @@ cxx.poptions =+ "-I$out_pfx_inc" "-I$src_pfx_inc" -DIMGUI_EXPORT
 # Export options.
 lib{imgui-render-vulkan}:
 {
-    cxx.export.poptions = "-I$out_pfx_inc" "-I$src_pfx_inc"
+    cxx.export.poptions = "-I$out_pfx_inc" "-I$src_pfx_inc" -DVK_PROTOTYPES
     cxx.export.libs = $intf_libs $platform_libs
 }
 

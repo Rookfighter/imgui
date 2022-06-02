@@ -14,3 +14,6 @@ package-email: swat.somebug@gmail.com
 depends: * build2 >= 0.14.0
 depends: * bpkg >= 0.14.0
 depends: imgui == $
+depends: Vulkan-Hpp ^1.0.0
+
+
